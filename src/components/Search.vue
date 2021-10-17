@@ -1,17 +1,33 @@
 <template>
 <div class="search">
-    <input type="text" placeholder="Search for any IP address or domain" />
-    <button type="submit">
+    <input type="text" v-model="search" placeholder="Search for any IP address or domain" />
+    <button type="submit" @click="searchIp">
         <img src="../assets/icon-arrow.svg" alt="Search" />
     </button>
 </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { useIp, useGeolocation } from '../store/store.js'
 
 export default defineComponent({
     name: 'Search',
+    setup() {
+        const search = ref('')
+        const { setIp } = useIp()
+        const { loadGeolocationDetails } = useGeolocation()
+
+        const searchIp = () => {
+            setIp(search.value)
+            loadGeolocationDetails()
+        }
+
+        return {
+            search,
+            searchIp
+        }
+    }
 })
 </script>
 
