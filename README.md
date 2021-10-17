@@ -1,7 +1,14 @@
-# Vue 3 + Vite
+# [IP Address Tracker Hub](https://ip-address-tracker-hub-jefflol.vercel.app/)
+IP Address Tracking web application based on [Frontend Mentor challenge](https://www.frontendmentor.io/challenges/ip-address-tracker-I8-0yYAH0)
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Demo
+[https://ip-address-tracker-hub-jefflol.vercel.app/](https://ip-address-tracker-hub-jefflol.vercel.app/)
 
-## Recommended IDE Setup
+## Features
+* View the optimal layout for each page depending on their device's screen size
+* See their own IP address on the map on the initial page load
+* Search for any IP addresses or domains and see the key information and location
+* State management with Vue composition API
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+## Running locally
+To run this webapp locally, you will need a Mapbox API Key from [https://account.mapbox.com/access-tokens/](https://account.mapbox.com/access-tokens/) to use Leaflet map and a Ipify API Key from [https://www.ipify.org](https://www.ipify.org). You can then set the VITE_ACCESS_TOKEN for Leaflet and VITE_GEOLOCATION_API_KEY for Ipify in a `.env.local` file.
