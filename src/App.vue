@@ -55,7 +55,7 @@ body {
 }
 
 .background-banner {
-    width: 100%;
+    height: 20%;
 }
 
 .background-map {
@@ -79,7 +79,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    margin-top: 5%;
+    margin-top: min(3%, 100px);
 }
 
 @media only screen and (min-width: 375px) {
@@ -91,6 +91,7 @@ body {
 @media only screen and (min-width: 1440px) {
     .background-banner {
         width: 100%;
+        height: auto;
     }
 }
 </style>
