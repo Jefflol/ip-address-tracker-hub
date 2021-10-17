@@ -1,5 +1,5 @@
 <template>
-<div class="search">
+<div class="search" :class="{ invalid: !isValid }" >
     <input type="text" v-model="search" placeholder="Search for any IP address or domain" />
     <button type="submit" @click="searchIp">
         <img src="../assets/icon-arrow.svg" alt="Search" />
@@ -8,22 +8,28 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import { useIp, useGeolocation } from '../store/store.js'
 
 export default defineComponent({
     name: 'Search',
     setup() {
+        const isValid = ref(true)
         const search = ref('')
         const { setIp } = useIp()
         const { loadGeolocationDetails } = useGeolocation()
 
-        const searchIp = () => {
+        const searchIp = async () => {
             setIp(search.value)
-            loadGeolocationDetails()
+            isValid.value = await loadGeolocationDetails()
         }
 
+        watch(search, () => {
+            isValid.value = true
+        })
+
         return {
+            isValid,
             search,
             searchIp
         }
@@ -47,6 +53,7 @@ export default defineComponent({
     width: 210px;
     margin: 0;
     border: 0;
+    border-radius: 15px 0 0 15px;
     padding: 0 16px 0 16px;
     font-family: 'Rubik';
     font-size: 16px;
@@ -90,5 +97,31 @@ export default defineComponent({
         width: 100%;
         max-width: 400px;
     }
+}
+
+.search.invalid {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate(0, 0, 0);
+}
+.search.invalid > input {
+    border: 2px solid rgba(239, 68, 68, 1);
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate(-1px, 0);
+  }
+  
+  20%, 80% {
+    transform: translate(2px, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate(-4px, 0);
+  }
+
+  40%, 60% {
+    transform: translate(4px, 0);
+  }
 }
 </style>

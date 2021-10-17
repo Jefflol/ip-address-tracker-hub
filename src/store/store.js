@@ -27,13 +27,18 @@ export function useGeolocation() {
 
         const ipAddress = ip.value
         const apiKey = import.meta.env.VITE_GEOLOCATION_API_KEY
-        const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&ipAddress=${ipAddress}`)
-        const data = await response.json()
-        
-        const details = formatGeolocationDetails(data)
-        geolocation.value = details
-        
-        loading.value = false
+
+        try {
+            const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&ipAddress=${ipAddress}`)
+            const data = await response.json()
+            const details = formatGeolocationDetails(data)
+            geolocation.value = details
+            loading.value = false
+        } catch(error) {
+            return false
+        }        
+
+        return true
     }
 
     const formatGeolocationDetails = (geolocationDetails) => {
