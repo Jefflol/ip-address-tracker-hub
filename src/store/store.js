@@ -1,21 +1,21 @@
 import { ref, computed } from 'vue'
 
-const ip = ref('')
-export function useIp() {
-    const setIp = (ipValue) => {
-        ip.value = ipValue
+const ipify = ref('')
+export function useIpify() {
+    const setIpify = (value) => {
+        ipify.value = value
     }
 
-    const loadIp = async () => {
+    const loadIpify = async () => {
         const response = await fetch(`https://api.ipify.org?format=json`)
         const data = await response.json()
-        ip.value = data.ip 
+        ipify.value = data.ip 
     }
 
     return {
-        ip: computed(() => ip.value),
-        loadIp,
-        setIp,
+        ipify: computed(() => ipify.value),
+        loadIpify,
+        setIpify,
     }
 }
 
@@ -25,20 +25,26 @@ export function useGeolocation() {
     const loadGeolocationDetails = async () => {
         loading.value = true
 
-        const ipAddress = ip.value
+        const ipifyValue = ipify.value
         const apiKey = import.meta.env.VITE_GEOLOCATION_API_KEY
 
+        const isIp = isCharacterALetter(ipify.value.charAt(0))
+        const query = isIp ? `domain=${ipifyValue}` : `ipAddress=${ipifyValue}`
+
         try {
-            const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&ipAddress=${ipAddress}`)
+            const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&${query}`)
             const data = await response.json()
-            const details = formatGeolocationDetails(data)
-            geolocation.value = details
-            loading.value = false
+            geolocation.value = formatGeolocationDetails(data)
         } catch(error) {
             return false
-        }        
-
+        }
+        
+        loading.value = false
         return true
+    }
+
+    const isCharacterALetter = (char) => {
+        return char.toLowerCase() != char.toUpperCase()
     }
 
     const formatGeolocationDetails = (geolocationDetails) => {

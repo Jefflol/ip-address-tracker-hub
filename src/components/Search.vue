@@ -1,7 +1,7 @@
 <template>
 <div class="search" :class="{ invalid: !isValid }" >
     <input type="text" v-model="search" placeholder="Search for any IP address or domain" />
-    <button type="submit" @click="searchIp">
+    <button type="submit" @click="searchIpify">
         <img src="../assets/icon-arrow.svg" alt="Search" />
     </button>
 </div>
@@ -9,18 +9,18 @@
 
 <script>
 import { defineComponent, ref, watch } from 'vue'
-import { useIp, useGeolocation } from '../store/store.js'
+import { useIpify, useGeolocation } from '../store/store.js'
 
 export default defineComponent({
     name: 'Search',
     setup() {
         const isValid = ref(true)
         const search = ref('')
-        const { setIp } = useIp()
+        const { setIpify } = useIpify()
         const { loadGeolocationDetails } = useGeolocation()
 
-        const searchIp = async () => {
-            setIp(search.value)
+        const searchIpify = async () => {
+            setIpify(search.value)
             isValid.value = await loadGeolocationDetails()
         }
 
@@ -31,7 +31,7 @@ export default defineComponent({
         return {
             isValid,
             search,
-            searchIp
+            searchIpify
         }
     }
 })

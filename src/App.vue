@@ -14,7 +14,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { useIp, useGeolocation } from './store/store.js'
+import { useIpify, useGeolocation } from './store/store.js'
 
 import Search from './components/Search.vue'
 import Details from './components/Details.vue'
@@ -29,10 +29,10 @@ export default defineComponent({
         Map
     },
     setup() {
-        const { loadIp } = useIp()
+        const { loadIpify } = useIpify()
         const { loadGeolocationDetails } = useGeolocation()
         
-        loadIp()
+        loadIpify()
         loadGeolocationDetails()
     }
 })
