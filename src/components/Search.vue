@@ -57,13 +57,13 @@ export default defineComponent({
     border-radius: 15px 0 0 15px;
     padding: 0 16px 0 16px;
     font-family: 'Rubik';
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     box-sizing: border-box;
 }
 
 .search > input:hover {
-    filter: brightness(0.95)
+    filter: brightness(0.98)
 }
 
 .search > button {
@@ -97,6 +97,10 @@ export default defineComponent({
         min-width: 0;
         width: 100%;
         max-width: 400px;
+    }
+
+    .search > input {
+        font-size: 16px;
     }
 }
 
