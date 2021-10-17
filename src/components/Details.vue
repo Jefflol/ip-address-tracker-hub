@@ -39,6 +39,7 @@ export default defineComponent({
     padding: 20px 0px;
     background-color: white;
     box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.05);
+    pointer-events: all;
 }
 
 @media only screen and (min-width: 375px) {

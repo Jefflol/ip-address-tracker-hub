@@ -80,6 +80,7 @@ body {
     left: 0;
     width: 100%;
     margin-top: min(3%, 100px);
+    pointer-events: none;
 }
 
 @media only screen and (min-width: 375px) {

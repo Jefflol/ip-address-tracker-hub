@@ -46,6 +46,7 @@ export default defineComponent({
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.05);
+    pointer-events: all;
 }
 
 .search > input {
