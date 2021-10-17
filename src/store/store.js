@@ -50,7 +50,7 @@ export function useGeolocation() {
     const formatGeolocationDetails = (geolocationDetails) => {
         const ip = geolocationDetails.ip
         const location = geolocationDetails.location
-        const formattedLocation = `${location.region}, ${location.country} ${location.postalCode}`
+        const formattedLocation = `${location.region}, ${location.country} ${location.postalCode}`.trim()
         const timezone = `UTC${location.timezone}`
         const isp = geolocationDetails.isp
         const latlng = [location.lat, location.lng]

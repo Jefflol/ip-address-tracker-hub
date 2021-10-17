@@ -42,6 +42,8 @@ export default defineComponent({
     color: hsl(0, 0%, 17%);
     font-size: 18px;
     font-weight: 500;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 @media only screen and (min-width: 1200px) {
@@ -61,7 +63,7 @@ export default defineComponent({
     }
 
     .details__item > p {        
-        max-width: 180px;
+        max-width: 240px;
         font-size: 28px;
     }
 }
