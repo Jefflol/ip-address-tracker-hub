@@ -1,14 +1,15 @@
 <template>
-<div class="details">
-    <DetailsItem name="IP Address" value="192.212.174.101" />
-    <DetailsItem name="Location" value="Brooklyn, NY 10001" />
-    <DetailsItem name="Timezone" value="UTC-05:00" />
-    <DetailsItem name="ISP" value="SpaceX Starlink" />
+<div v-if="!loading" class="details">
+    <DetailsItem name="IP Address" :value="geolocation.ipAddress" />
+    <DetailsItem name="Location" :value="geolocation.location" />
+    <DetailsItem name="Timezone" :value="geolocation.timezone" />
+    <DetailsItem name="ISP" :value="geolocation.isp" />
 </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
+import { useGeolocation } from '../store/store.js'
 
 import DetailsItem from './DetailsItem.vue'
 
@@ -17,6 +18,14 @@ export default defineComponent({
     components: {
         DetailsItem
     },
+    setup() {
+        const { geolocation, loading } = useGeolocation()
+
+        return {
+            geolocation,
+            loading
+        }
+    }
 })
 </script>
 
